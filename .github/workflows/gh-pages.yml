@@ -7,6 +7,9 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,7 +25,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify --baseURL=https://hugoinaction.github.io/GitHubPages
+        run: hugo --minify --baseURL=https://leedark.github.io/acme-corporation/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
