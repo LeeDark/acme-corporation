@@ -1,5 +1,6 @@
 <!-- guitar -->
-{{- $json := getJSON $.Site.Params.Guitar "?" (querify "q" .Inner) -}}
+{{- $guitarURL := printf "%s?%s" $.Site.Params.Guitar (querify "q" .Inner) -}}
+{{- $json := resources.GetRemote $guitarURL | transform.Unmarshal (dict "format" "json") -}}
 {{- with $json.svg -}}
 {{. | safeHTML}}
 {{- end -}}

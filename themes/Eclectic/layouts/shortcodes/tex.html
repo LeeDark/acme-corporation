@@ -3,8 +3,8 @@
 {{- if eq (.Get 0) "inline" -}}
 {{ $inline = "&inline=true" }}
 {{- end -}}
-{{- $json := getJSON $.Site.Params.Tex "?" (querify "q" .Inner) $inline -}}
+{{- $texURL := printf "%s?%s%s" $.Site.Params.Tex (querify "q" .Inner) $inline -}}
+{{- $json := resources.GetRemote $texURL | transform.Unmarshal (dict "format" "json") -}}
 {{- with $json.svg -}}
 {{. | safeHTML}}
 {{- end -}}
-
